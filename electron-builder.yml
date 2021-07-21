@@ -15,11 +15,11 @@ win:
 nsis:
   perMachine: false
   oneClick: false
-  allowToChangeInstallationDirectory: false
+  allowToChangeInstallationDirectory: true
   artifactName: "Scratch-Arduino-Link-Win-${version}.${ext}"
   deleteAppDataOnUninstall: true
   createDesktopShortcut: true
-  # include: buildResources/installer.nsh
+  include: buildResources/installer.nsh
 
 mac:  # Manual delte app data after uninstall
   category: public.app-category.education
