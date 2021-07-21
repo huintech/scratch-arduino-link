@@ -13,7 +13,7 @@ const filterAsset = asset => {
     if (process.platform === 'win32') {
         return (asset.name.indexOf('Win') >= 0);
     } else if (process.platform === 'darwin') {
-        return (asset.name.indexOf('MacOS') >= 0);
+        return (asset.name.indexOf('Mac') >= 0);
     }
 }
 
