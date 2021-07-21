@@ -31,9 +31,9 @@ mac:  # Manual delte app data after uninstall
         This app requires microphone access when recording sounds or detecting loudness.
   gatekeeperAssess: true
   hardenedRuntime: true
-  icon: buildResources/ScratchDesktop.icns
+  icon: buildResources/scratch-arduino-link.icns
   provisioningProfile: embedded.provisionprofile
-  artifactName: "Scratch-Arduino-Link-MacOS-${version}.${ext}"
+  artifactName: "Scratch-Arduino-Link-Mac-${version}.${ext}"
   target:
     - dmg
 
