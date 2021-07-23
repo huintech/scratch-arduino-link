@@ -5,6 +5,7 @@ extraResources: ["tools", "firmwares", "libraryes"]
 
 appId: "com.ottawastem.scratch-arduino-link"
 productName: "Scratch Arduino Link"
+npmRebuild: false
 publish: # empty provider list = don't publish
 
 win:
@@ -21,7 +22,7 @@ nsis:
   createDesktopShortcut: true
   include: buildResources/installer.nsh
 
-mac:  # Manual delte app data after uninstall
+mac:
   category: public.app-category.education
   entitlements: buildResources/entitlements.mac.plist
   extendInfo:
