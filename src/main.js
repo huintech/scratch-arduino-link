@@ -80,11 +80,16 @@ function createWindow() {
             click: function () {
                 appTray.destroy();
                 mainWindow.destroy();
+                app.exit();
             }
         }
     ];
  
-    appTray = new Tray(nativeImage.createFromPath(path.join(__dirname, './icon/scratch-arduino-link.ico')));
+    if (process.platform === 'win32') {
+        appTray = new Tray(nativeImage.createFromPath(path.join(__dirname, './icon/scratch-arduino-link.ico')));
+    } else if (process.platform === 'darwin') {
+        appTray = new Tray(path.join(__dirname, './icon/scratch-arduino-link-menubar.png'));
+    }
     const contextMenu = Menu.buildFromTemplate(trayMenuTemplate);
     appTray.setToolTip('Scratch Arudino Link');
     appTray.setContextMenu(contextMenu);
@@ -105,14 +110,14 @@ function createWindow() {
 
 const gotTheLock = app.requestSingleInstanceLock()
 if (!gotTheLock) {
-    app.quit()
+    app.quit();
 } else {
     app.on('second-instance', (event, commandLine, workingDirectory) => {
         if (mainWindow) {
             if (mainWindow.isMinimized()) 
-                mainWindow.restore()
-            mainWindow.focus()
-            mainWindow.show()
+                mainWindow.restore();
+            mainWindow.focus();
+            mainWindow.show();
         }
     })
     app.on('ready', createWindow);

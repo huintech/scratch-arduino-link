@@ -24,11 +24,32 @@
     ],
     "libraries": [
         {
+            "libraryName": "DHTStable Sensor",
+            "description": "DTH11 Humidity and Temperature Sensor Library - v1.0.1",
+            "version": "v1.0.1",
+            "fileName": "DHTStable-v1.0.1.zip",
+            "folderName": "DHTStable"
+        },
+        {
             "libraryName": "OttoDIYLib",
             "description": "Otto Robotic Arduino Library - v9.3.0",
             "version": "v9.3.0",
             "fileName": "OttoDIYlib-v9.3.0.zip",
             "folderName": "OttoDIYLib"
+        },
+        {
+            "libraryName": "Seppter Motor",
+            "description": "Stepper Motor Library - v1.1.3",
+            "version": "v1.1.3",
+            "fileName": "Stepper-v1.1.3.zip",
+            "folderName": "Stepper"
+        },
+        {
+            "libraryName": "Ultrasonic Sensor",
+            "description": "Ultrasonic Sensor Library - v3.0.0",
+            "version": "v3.0.0",
+            "fileName": "Ultrasonic-v3.0.0.zip",
+            "folderName": "Ultrasonic"
         }
     ]
 }
