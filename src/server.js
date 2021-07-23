@@ -90,30 +90,9 @@ class ScratchArduinoLink extends Emitter{
      */
     async start () {
         try {
-            // Initial install arduino tools
-            if (!fs.existsSync(this.toolsPath)) {
-                const toolsRepo = 'scratch-arduino-tools';
-                const toolsPath = path.resolve(this.toolsPath, '../');
-                console.log(toolsPath);
-                const filterAsset = asset => {
-                    if (process.platform === 'win32') {
-                        return (asset.name.indexOf('Win') >= 0);
-                    } else if (process.platform === 'darwin') {
-                        return (asset.name.indexOf('MacOS') >= 0);
-                    }
-                }
-                await downloadRelease(user, toolsRepo, toolsPath, filterRelease, filterAsset, leaveZipped)
-                    .then(() => {
-                        console.log('tools download complete.');
-                    })
-                    .catch(err => {
-                        console.error(err.message);
-                    });
-            }
-            
             // Download index.json
             const repo = 'scratch-arduino-link';
-            const indexPath = path.resolve(this.toolsPath, '..');
+            const indexPath = path.resolve(this.toolsPath);
             const filterAsset = asset => (asset.name.indexOf('index.json') >= 0);
             await downloadRelease(user, repo, indexPath, filterRelease, filterAsset, leaveZipped)
                 .then(() => {
