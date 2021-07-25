@@ -6,7 +6,8 @@
   "scripts": {
     "clean": "rimraf dist tools libraries firmwares",
     "fetch": "npm run clean && node script/download-tools.js && node script/download-libraries.js && node script/download-firmwares.js",
-    "build": "rimraf dist && electron-builder",
+    "build-win": "npm run fetch && electron-builder --conifig electron-builder-win.yml",
+    "build-mac": "npm run fetch && electron-builder --conifig electron-builder-mac.yml",
     "start": "electron .",
     "docs": "jsdoc -c .jsdoc.json",
     "test": "node script/test.js",
@@ -17,7 +18,7 @@
     "url": "git+https://github.com/ottawastem/scratch-arduino-link.git"
   },
   "keywords": [
-    "scratch-arduino",
+    "scratch",
     "link",
     "arduino",
     "nodejs",
