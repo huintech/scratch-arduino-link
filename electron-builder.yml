@@ -8,6 +8,12 @@ productName: "Scratch Arduino Link"
 npmRebuild: false
 publish: # empty provider list = don't publish
 
+fileAssociations:
+  ext: sba
+  name: Scratch Arduino Project File
+  role: Editor
+  icon: buildResources/scratch-arduino-file.ico
+
 win:
   icon: buildResources/scratch-arduino-link.ico
   target:
