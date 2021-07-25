@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rimraf dist tools libraries firmwares",
     "fetch": "npm run clean && node script/download-tools.js && node script/download-libraries.js && node script/download-firmwares.js",
-    "build-win": "electron-builder --config electron-builder-win.yml",
+    "build-win": "npm run fetch && electron-builder --config electron-builder-win.yml",
     "build-mac": "npm run fetch && electron-builder --config electron-builder-mac.yml",
     "start": "electron .",
     "docs": "jsdoc -c .jsdoc.json",
