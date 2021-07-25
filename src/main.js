@@ -1,4 +1,5 @@
-const { app, BrowserWindow, nativeImage, shell } = require('electron');
+const { app, BrowserWindow, nativeImage, shell, dialog } = require('electron');
+const remoteGitTags = require('remote-git-tags');
 const path = require('path');
 const electron = require('electron');
 
@@ -31,13 +32,13 @@ function createWindow() {
     mainWindow.setMenu(null)
     
     const userDataPath = electron.app.getPath('userData');
-    console.log('userDataPath: ', userDataPath);
+    // console.log('userDataPath: ', userDataPath);
     const dataPath = path.join(userDataPath, 'Data');
 
     const appPath = app.getAppPath();
 
     const appVersion = app.getVersion();
-    console.log('Current version: ', appVersion);
+    // console.log('Current version: ', appVersion);
 
     // if current version is newer then cache log, delet the data cache dir and write the
     // new version into the cache file.
@@ -133,4 +134,33 @@ app.on('activate', function () {
     if (mainWindow === null) {
         createWindow();
     }
+})
+
+app.whenReady().then(() => {
+    (async () => {
+        let dialogOptions = {
+            title: 'Scratch Arduino Link',
+            type: 'info',
+            buttons: ['Download', 'Later'],
+            defaultId: 0,
+            message: 'New release available.',
+            detail: '',
+            noLink: true,
+            icon: path.join(__dirname, './icon/scratch-arduino-link.ico')
+        }
+        if (process.platform === 'darwin') {
+            dialogOptions.icon = path.join(__dirname, './icon/scratch-arduino-link.icns')
+        }
+        const tags = await remoteGitTags('https://github.com/OttawaSTEM/scratch-arduino-link')
+        const latestVersion = Array.from(tags.keys()).pop().substring(1);
+        if (latestVersion > app.getVersion()) {
+            dialogOptions.detail = 'Installed version: v' + app.getVersion() + '\n';  
+            dialogOptions.detail = dialogOptions.detail + 'Latest version: v' + latestVersion;  
+            dialog.showMessageBox(null, dialogOptions).then((data) => {
+                if (data.response == 0) {
+                    shell.openExternal('https://github.com/OttawaSTEM/scratch-arduino-link/releases/latest');
+                }
+            });
+        }
+    })();
 })
