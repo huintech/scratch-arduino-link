@@ -26,9 +26,9 @@ mac:
   hardenedRuntime: true
   icon: buildResources/scratch-arduino-link.icns
   provisioningProfile: embedded.provisionprofile
-  artifactName: "Scratch-Arduino-Link-Mac-${version}.${ext}"
+  artifactName: "Scratch-Arduino-Link-Mac-v${version}.${ext}"
   target:
     - dmg
 
 dmg:
-  title: "Scratch-Arduino-Link-MacOS-${version}"
+  title: "Scratch-Arduino-Link-MacOS-v${version}"

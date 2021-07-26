@@ -22,7 +22,7 @@ nsis:
   perMachine: false
   oneClick: false
   allowToChangeInstallationDirectory: true
-  artifactName: "Scratch-Arduino-Link-Win-${version}.${ext}"
+  artifactName: "Scratch-Arduino-Link-Win-v${version}.${ext}"
   deleteAppDataOnUninstall: true
   createDesktopShortcut: true
   include: buildResources/installer.nsh
