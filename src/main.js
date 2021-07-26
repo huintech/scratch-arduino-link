@@ -32,16 +32,13 @@ function createWindow() {
     mainWindow.setMenu(null)
     
     const userDataPath = electron.app.getPath('userData');
-    // console.log('userDataPath: ', userDataPath);
     const dataPath = path.join(userDataPath, 'Data');
-
     const appPath = app.getAppPath();
-
     const appVersion = app.getVersion();
+    // console.log('userDataPath: ', userDataPath);
     // console.log('Current version: ', appVersion);
 
-    // if current version is newer then cache log, delet the data cache dir and write the
-    // new version into the cache file.
+    // if current version is newer then cache log, delet the data cache dir and write the new version into the cache file.
     const applicationConfig = path.join(userDataPath, 'application.json');
     if (fs.existsSync(applicationConfig)) {
         const oldVersion = JSON.parse(fs.readFileSync(applicationConfig)).version;
@@ -71,6 +68,13 @@ function createWindow() {
 
     const trayMenuTemplate = [
         {
+            label: 'Lanuch',
+            click: function () {
+                shell.openExternal('https://scratch.ottawastem.com/')
+            }
+        },
+        {type: 'separator'},
+        {
             label: 'Help',
             click: function () {
                 shell.openExternal('https://github.com/OttawaSTEM/scratch-arduino-gui/tree/main')
@@ -89,7 +93,7 @@ function createWindow() {
     if (process.platform === 'win32') {
         appTray = new Tray(nativeImage.createFromPath(path.join(__dirname, './icon/scratch-arduino-link.ico')));
     } else if (process.platform === 'darwin') {
-        appTray = new Tray(path.join(__dirname, './icon/scratch-arduino-link-menubar.png'));
+        appTray = new Tray(nativeImage.createFromPath(path.join(__dirname, './icon/scratch-arduino-link-menubar.png')));
     }
     const contextMenu = Menu.buildFromTemplate(trayMenuTemplate);
     appTray.setToolTip('Scratch Arudino Link');
