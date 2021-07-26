@@ -27,12 +27,19 @@ jobs:
         if: matrix.os == 'windows-latest'
         run: npm run build-win
 
+      - name: Get tag
+        uses: oprypin/find-latest-tag@v1
+        id: tagName
+        with: 
+          repository: OttawaSTEM/scratch-arduino-link
+          releases-only: true
+
       - name: Zip exe file to zip for Windows
         if: matrix.os == 'windows-latest'
         uses: papeloto/action-zip@v1
         with:
-          files: dist/*.exe
-          dest: dist/*.zip
+          files: dist/Scratch-Arduino-Link-Win-${{ steps.tagName.outputs.tag }}.exe
+          dest: dist/Scratch-Arduino-Link-Win-${{ steps.tagName.outputs.tag }}.zip
 
       - name: Cleanup Windows artifacts
         if: matrix.os == 'windows-latest'
@@ -52,13 +59,6 @@ jobs:
       - name: Cleanup Mac OS artifacts
         if: matrix.os == 'macos-latest'
         run: npx rimraf "dist/!(*.dmg)"
-
-      - name: Get tag
-        uses: oprypin/find-latest-tag@v1
-        id: tagName
-        with: 
-          repository: OttawaSTEM/scratch-arduino-link
-          releases-only: true
 
       - name: Github Release
         uses: ncipollo/release-action@v1
