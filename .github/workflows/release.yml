@@ -27,9 +27,16 @@ jobs:
         if: matrix.os == 'windows-latest'
         run: npm run build-win
 
+      - name: Zip exe file to zip for Windows
+        if: matrix.os == 'windows-latest'
+        uses: papeloto/action-zip@v1
+        with:
+          files: dist/*.exe
+          dest: dist/*.zip
+
       - name: Cleanup Windows artifacts
         if: matrix.os == 'windows-latest'
-        run: npx rimraf "dist/!(*.exe)"
+        run: npx rimraf "dist/!(*.zip)"
 
       - name: Mac prebuild
         if: matrix.os == 'macos-latest'
