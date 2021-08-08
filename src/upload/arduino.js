@@ -67,9 +67,9 @@ class Arduino {
                 '--build-path', path.join(this._projectfilePath, 'build'),
                 '--build-cache-path', path.join(this._projectfilePath, 'cache'),
                 '--output-dir', path.join(this._projectfilePath, 'output'),
-                '-e',
+                '--export-binaries',
                 '--warnings=none',
-                '--verbose',
+                // '--verbose',
                 this._codefilePath
             ];
 
@@ -124,9 +124,9 @@ class Arduino {
         const args = [
             'upload',
             '--fqbn', this._config.fqbn,
-            '--verbose',
             '--verify',
-            `-p${this._peripheralPath}`
+            `-p${this._peripheralPath}`,
+            '--verbose'
         ];
 
         if (firmwarePath) {
