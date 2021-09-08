@@ -139,21 +139,33 @@ class ScratchArduinoLink extends Emitter{
             // scratch-arduino-firmwares
             const firmwaresRepo = 'scratch-arduino-firmwares';
             const firmwarePath = path.join(path.resolve(this.toolsPath), '../firmwares');
+            const firmwareExtractPath = path.join(firmwarePath, 'arduino');
             const oldFirmwareVersionPath = path.join(firmwarePath, 'firmware-version.json');
-            if (!fs.existsSync(firmwarePath)) {
-                fs.mkdirSync(path.join(firmwarePath, 'arduino'), {recursive: true});
-                fs.writeFileSync(oldFirmwareVersionPath, '{}');
+            if (!fs.existsSync(firmwareExtractPath)) {
+                fs.mkdirSync(firmwareExtractPath, {recursive: true});
             }
-            const oldFirmwareVersion = await loadJsonFile(oldFirmwareVersionPath);
-            for (const firmware of linkPackages['firmwares']) {
-                if (!oldFirmwareVersion.hasOwnProperty(firmware['firmwareName']) || (firmware['version'] > oldFirmwareVersion[firmware['firmwareName']])) {
+            if (!fs.existsSync(oldFirmwareVersionPath)) {
+                for (const firmware of linkPackages['firmwares']) {
                     const libraryFilterAsset = asset => (asset.name.indexOf(firmware['firmwareName']) >= 0);
-                    await downloadRelease(user, firmwaresRepo, path.join(firmwarePath, 'arduino'), filterRelease, libraryFilterAsset, leaveZipped)
+                    await downloadRelease(user, firmwaresRepo, firmwareExtractPath, filterRelease, libraryFilterAsset, leaveZipped)
                         .then(() => {
                             console.log(firmware['fileName'], ' download complete.');
                         }).catch(err => {
                             console.error(err.message);
                         });
+                }
+            } else {
+                const oldFirmwareVersion = await loadJsonFile(oldFirmwareVersionPath);
+                for (const firmware of linkPackages['firmwares']) {
+                    if (!oldFirmwareVersion.hasOwnProperty(firmware['firmwareName']) || (firmware['version'] > oldFirmwareVersion[firmware['firmwareName']])) {
+                        const libraryFilterAsset = asset => (asset.name.indexOf(firmware['firmwareName']) >= 0);
+                        await downloadRelease(user, firmwaresRepo, firmwareExtractPath, filterRelease, libraryFilterAsset, leaveZipped)
+                            .then(() => {
+                                console.log(firmware['fileName'], ' download complete.');
+                            }).catch(err => {
+                                console.error(err.message);
+                            });
+                    }
                 }
             }
             let firmwareData = {};      // Save current firmware version
