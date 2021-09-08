@@ -20,6 +20,13 @@
             "version": "v2.5.8",
             "fileName": "ArduinoStandardFirmata-v2.5.8.zip",
             "folderName": "android"
+        },
+        {
+            "firmwareName": "ArduinoFastLEDFirmata",
+            "description": "Arduino FastLED Customized Firmata - v0.0.1",
+            "version": "v0.0.1",
+            "fileName": "ArduinoFastLEDFirmata-v0.0.1.zip",
+            "folderName": "android"
         }
     ],
     "libraries": [
@@ -43,6 +50,13 @@
             "version": "v9.3.0",
             "fileName": "OttoDIYlib-v9.3.0.zip",
             "folderName": "OttoDIYLib"
+        },
+        {
+            "libraryName": "ServoESP32",
+            "description": "ESP32 Servo - v1.0.3",
+            "version": "v1.0.3",
+            "fileName": "ServoESP32-v1.0.3.zip",
+            "folderName": "ServoESP32"
         },
         {
             "libraryName": "Ultrasonic Sensor",
