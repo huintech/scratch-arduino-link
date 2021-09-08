@@ -77,7 +77,7 @@ function createWindow() {
         {
             label: 'Help',
             click: function () {
-                shell.openExternal('https://github.com/OttawaSTEM/scratch-arduino-gui/tree/main')
+                shell.openExternal('https://ottawastem.com/support/')
             }
         },
         {

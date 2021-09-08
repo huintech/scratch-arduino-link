@@ -104,59 +104,63 @@ class ScratchArduinoLink extends Emitter{
             const linkPackages = await loadJsonFile(path.join(indexPath, 'index.json'));
 
             // scratch-arduino-libraries
+            const librariesRepo = 'scratch-arduino-libraries';
             const libraryPath = path.join(path.resolve(this.toolsPath), '/Arduino/libraries');
+            const oldLibraryVersionPath = path.join(libraryPath, 'library-version.json');
+            const oldLibraryVersion = await loadJsonFile(oldLibraryVersionPath);
             for (const library of linkPackages['libraries']) {
-                const librariesRepo = 'scratch-arduino-libraries';
                 if (!fs.existsSync(path.join(libraryPath, library['folderName']))) {
                     const libraryFilterAsset = asset => (asset.name.indexOf(library['libraryName']) >= 0);
                     await downloadRelease(user, librariesRepo, libraryPath, filterRelease, libraryFilterAsset, leaveZipped)
-                        .then(() => {
-                            console.log(library['fileName'], ' download complete.');
-                        })
-                        .catch(err => {
-                            console.error(err.message);
-                        });
+                    .then(() => {
+                        console.log(library['fileName'], ' download complete.');
+                    }).catch(err => {
+                        console.error(err.message);
+                    });
+                } else {
+                    if (!oldLibraryVersion.hasOwnProperty(library['libraryName']) || (library['version'] > oldLibraryVersion[library['libraryName']])) {
+                        fs.rmdir(path.join(libraryPath, library['folderName']), { recursive: true }, (error) => {console.error(error);});
+                        const libraryFilterAsset = asset => (asset.name.indexOf(library['libraryName']) >= 0);
+                        await downloadRelease(user, librariesRepo, libraryPath, filterRelease, libraryFilterAsset, leaveZipped)
+                            .then(() => {
+                                console.log(library['fileName'], ' download complete.');
+                            }).catch(err => {
+                                console.error(err.message);
+                            });
+                    }
                 }
             }
+            let libraryData = {};      // Save current arduino library version
+            for (const library of linkPackages['libraries']) {
+                libraryData[library['libraryName']] = library['version'];
+            }
+            fs.writeFileSync(oldLibraryVersionPath, JSON.stringify(libraryData));   
             
             // scratch-arduino-firmwares
             const firmwaresRepo = 'scratch-arduino-firmwares';
             const firmwarePath = path.join(path.resolve(this.toolsPath), '../firmwares');
             const oldFirmwareVersionPath = path.join(firmwarePath, 'firmware-version.json');
             if (!fs.existsSync(firmwarePath)) {
-                fs.mkdirSync(firmwarePath, {recursive: true});
+                fs.mkdirSync(path.join(firmwarePath, 'arduino'), {recursive: true});
+                fs.writeFileSync(oldFirmwareVersionPath, '{}');
             }
-            if (!fs.existsSync(oldFirmwareVersionPath)) {
-                for (const firmware of linkPackages['firmwares']) {
+            const oldFirmwareVersion = await loadJsonFile(oldFirmwareVersionPath);
+            for (const firmware of linkPackages['firmwares']) {
+                if (!oldFirmwareVersion.hasOwnProperty(firmware['firmwareName']) || (firmware['version'] > oldFirmwareVersion[firmware['firmwareName']])) {
                     const libraryFilterAsset = asset => (asset.name.indexOf(firmware['firmwareName']) >= 0);
-                    await downloadRelease(user, firmwaresRepo, firmwarePath, filterRelease, libraryFilterAsset, leaveZipped)
+                    await downloadRelease(user, firmwaresRepo, path.join(firmwarePath, 'arduino'), filterRelease, libraryFilterAsset, leaveZipped)
                         .then(() => {
                             console.log(firmware['fileName'], ' download complete.');
-                        })
-                        .catch(err => {
+                        }).catch(err => {
                             console.error(err.message);
                         });
                 }
-            } else {
-                const oldFirmwareVersion = await loadJsonFile(oldFirmwareVersionPath);
-                for (const firmware of linkPackages['firmwares']) {
-                    if (firmware['version'] > oldFirmwareVersion[firmware['firmwareName']]) {
-                        const libraryFilterAsset = asset => (asset.name.indexOf(firmware['firmwareName']) >= 0);
-                        await downloadRelease(user, firmwaresRepo, firmwarePath, filterRelease, libraryFilterAsset, leaveZipped)
-                            .then(() => {
-                                console.log(firmware['fileName'], ' download complete.');
-                            })
-                            .catch(err => {
-                                console.error(err.message);
-                            });
-                    }
-                }
             }
-            let data = {};      // Save current firmware version
+            let firmwareData = {};      // Save current firmware version
             for (const firmware of linkPackages['firmwares']) {
-                data[firmware['firmwareName']] = firmware['version'];
+                firmwareData[firmware['firmwareName']] = firmware['version'];
             }
-            fs.writeFileSync(oldFirmwareVersionPath, JSON.stringify(data));            
+            fs.writeFileSync(oldFirmwareVersionPath, JSON.stringify(firmwareData));            
         } catch(err) {
             dialog.showMessageBox({
                 title: 'Scratch Arduino Link',
