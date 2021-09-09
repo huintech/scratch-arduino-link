@@ -139,15 +139,14 @@ class ScratchArduinoLink extends Emitter{
             // scratch-arduino-firmwares
             const firmwaresRepo = 'scratch-arduino-firmwares';
             const firmwarePath = path.join(path.resolve(this.toolsPath), '../firmwares');
-            const firmwareExtractPath = path.join(firmwarePath, 'arduino');
             const oldFirmwareVersionPath = path.join(firmwarePath, 'firmware-version.json');
-            if (!fs.existsSync(firmwareExtractPath)) {
-                fs.mkdirSync(firmwareExtractPath, {recursive: true});
+            if (!fs.existsSync(firmwarePath)) {
+                fs.mkdirSync(firmwarePath, {recursive: true});
             }
             if (!fs.existsSync(oldFirmwareVersionPath)) {
                 for (const firmware of linkPackages['firmwares']) {
                     const libraryFilterAsset = asset => (asset.name.indexOf(firmware['firmwareName']) >= 0);
-                    await downloadRelease(user, firmwaresRepo, firmwareExtractPath, filterRelease, libraryFilterAsset, leaveZipped)
+                    await downloadRelease(user, firmwaresRepo, firmwarePath, filterRelease, libraryFilterAsset, leaveZipped)
                         .then(() => {
                             console.log(firmware['fileName'], ' download complete.');
                         }).catch(err => {
@@ -159,7 +158,7 @@ class ScratchArduinoLink extends Emitter{
                 for (const firmware of linkPackages['firmwares']) {
                     if (!oldFirmwareVersion.hasOwnProperty(firmware['firmwareName']) || (firmware['version'] > oldFirmwareVersion[firmware['firmwareName']])) {
                         const libraryFilterAsset = asset => (asset.name.indexOf(firmware['firmwareName']) >= 0);
-                        await downloadRelease(user, firmwaresRepo, firmwareExtractPath, filterRelease, libraryFilterAsset, leaveZipped)
+                        await downloadRelease(user, firmwaresRepo, firmwarePath, filterRelease, libraryFilterAsset, leaveZipped)
                             .then(() => {
                                 console.log(firmware['fileName'], ' download complete.');
                             }).catch(err => {
