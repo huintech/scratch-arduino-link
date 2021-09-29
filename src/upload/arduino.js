@@ -124,7 +124,7 @@ class Arduino {
         const args = [
             'upload',
             '--fqbn', this._config.fqbn,
-            '--verify',
+            // '--verify',      // Arduino device read error some times, so disable verify after upload
             `-p${this._peripheralPath}`,
             '--verbose'
         ];
