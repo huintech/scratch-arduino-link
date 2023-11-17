@@ -3,18 +3,18 @@ directories:
   output: dist
 extraResources: ["tools", "firmwares", "libraryes"]
 
-appId: "com.ottawastem.scratch-arduino-link"
-productName: "Scratch Arduino Link"
+appId: "net.huintech.scratch-coconut-link"
+productName: "Scratch COCONUT Link"
 publish: # empty provider list = don't publish
 
 fileAssociations:
   ext: sba
-  name: Scratch Arduino Project File
+  name: Scratch Coconut Project File
   role: Editor
   icon: buildResources/scratch-arduino-file.ico
 
 win:
-  icon: buildResources/scratch-link.ico
+  icon: buildResources/scratch-arduino-link.ico
   target:
     - nsis
 
@@ -22,7 +22,7 @@ nsis:
   perMachine: false
   oneClick: false
   allowToChangeInstallationDirectory: true
-  artifactName: "Scratch-Arduino-Link-Win-v${version}.${ext}"
+  artifactName: "Scratch-COCONUT-Link-Win-v${version}.${ext}"
   deleteAppDataOnUninstall: true
   createDesktopShortcut: true
   include: buildResources/installer.nsh

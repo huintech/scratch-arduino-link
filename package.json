@@ -1,7 +1,7 @@
 {
   "name": "scratch-arduino-link",
   "version": "1.0.0",
-  "description": "Porvide local hardware function to scratch-arduino",
+  "description": "Provide local hardware function to scratch-arduino",
   "main": "src/main.js",
   "scripts": {
     "clean": "rimraf dist tools libraries firmwares",
