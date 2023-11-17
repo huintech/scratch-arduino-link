@@ -24,7 +24,7 @@ mac:
         This app requires microphone access when recording sounds or detecting loudness.
   gatekeeperAssess: true
   hardenedRuntime: true
-  icon: buildResources/scratch-arduino-link.icns
+  icon: buildResources/scratch-link.icns
   provisioningProfile: embedded.provisionprofile
   artifactName: "Scratch-Arduino-Link-Mac-v${version}.${ext}"
   target:

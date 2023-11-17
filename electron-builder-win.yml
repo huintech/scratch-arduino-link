@@ -14,7 +14,7 @@ fileAssociations:
   icon: buildResources/scratch-arduino-file.ico
 
 win:
-  icon: buildResources/scratch-arduino-link.ico
+  icon: buildResources/scratch-link.ico
   target:
     - nsis
 
