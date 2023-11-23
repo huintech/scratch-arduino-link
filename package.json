@@ -1,7 +1,7 @@
 {
   "name": "scratch-arduino-link",
-  "version": "1.0.0",
-  "description": "Porvide local hardware function to scratch-arduino",
+  "version": "0.1.0",
+  "description": "Provide local hardware function to scratch-arduino",
   "main": "src/main.js",
   "scripts": {
     "clean": "rimraf dist tools libraries firmwares",
@@ -9,13 +9,14 @@
     "build-win": "npm run fetch && electron-builder --config electron-builder-win.yml",
     "build-mac": "npm run fetch && electron-builder --config electron-builder-mac.yml",
     "start": "electron .",
+    "install": "electron-rebuild",
     "docs": "jsdoc -c .jsdoc.json",
     "test": "node script/test.js",
     "lint": "eslint ./src"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ottawastem/scratch-arduino-link.git"
+    "url": "git+https://github.com/huintech/scratch-arduino-link.git"
   },
   "keywords": [
     "scratch",
@@ -25,12 +26,12 @@
     "scratch3.0",
     "serialport"
   ],
-  "author": "Ottawa STEM Club",
+  "author": "Coconut",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ottawastem/scratch-arduino-link/issues"
+    "url": "https://github.com/huintech/scratch-arduino-link/issues"
   },
-  "homepage": "https://github.com/ottawastem/scratch-arduino-link#readme",
+  "homepage": "https://github.com/huintech/scratch-arduino-link#readme",
   "dependencies": {
     "ansi-string": "^0.2.1",
     "compare-versions": "^3.6.0",
@@ -49,6 +50,7 @@
     "cpy-cli": "^3.1.1",
     "electron": "^13.1.7",
     "electron-builder": "^22.11.7",
+    "electron-rebuild": "^3.2.9",
     "eslint": "^5.3.0",
     "jsdoc": "^3.6.6",
     "rimraf": "^3.0.2"

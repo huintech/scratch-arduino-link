@@ -17,7 +17,7 @@ let mainWindow;
 
 function createWindow() {
     mainWindow = new BrowserWindow({
-        icon: path.join(__dirname, './icon/scratch-arduino-link.ico'),
+        icon: path.join(__dirname, './icon/scratch-link.ico'),
         width: 400,
         height: 400,
         center: true,
@@ -30,7 +30,7 @@ function createWindow() {
 
     mainWindow.loadFile('./src/index.html');
     mainWindow.setMenu(null)
-    
+
     const userDataPath = electron.app.getPath('userData');
     const dataPath = path.join(userDataPath, 'Data');
     const appPath = app.getAppPath();
@@ -70,14 +70,14 @@ function createWindow() {
         {
             label: 'Lanuch',
             click: function () {
-                shell.openExternal('https://scratch.ottawastem.com/')
+                shell.openExternal('http://coco-nut.kr/')
             }
         },
         {type: 'separator'},
         {
             label: 'Help',
             click: function () {
-                shell.openExternal('https://ottawastem.com/support/')
+                shell.openExternal('http://coco-nut.kr/support/')
             }
         },
         {
@@ -89,22 +89,22 @@ function createWindow() {
             }
         }
     ];
- 
+
     if (process.platform === 'win32') {
-        appTray = new Tray(nativeImage.createFromPath(path.join(__dirname, './icon/scratch-arduino-link.ico')));
+        appTray = new Tray(nativeImage.createFromPath(path.join(__dirname, './icon/scratch-link.ico')));
     } else if (process.platform === 'darwin') {
-        appTray = new Tray(nativeImage.createFromPath(path.join(__dirname, './icon/scratch-arduino-link-menubar.png')));
+        appTray = new Tray(nativeImage.createFromPath(path.join(__dirname, './icon/scratch-link-menubar.png')));
     }
     const contextMenu = Menu.buildFromTemplate(trayMenuTemplate);
     appTray.setToolTip('Scratch Arudino Link');
     appTray.setContextMenu(contextMenu);
-    
+
     appTray.on('click',function(){
         mainWindow.show();
     })
 
-    mainWindow.on('close', (event) => { 
-        mainWindow.hide(); 
+    mainWindow.on('close', (event) => {
+        mainWindow.hide();
         event.preventDefault();
     });
 
@@ -119,7 +119,7 @@ if (!gotTheLock) {
 } else {
     app.on('second-instance', (event, commandLine, workingDirectory) => {
         if (mainWindow) {
-            if (mainWindow.isMinimized()) 
+            if (mainWindow.isMinimized())
                 mainWindow.restore();
             mainWindow.focus();
             mainWindow.show();
@@ -150,19 +150,19 @@ app.whenReady().then(() => {
             message: 'New release available.',
             detail: '',
             noLink: true,
-            icon: path.join(__dirname, './icon/scratch-arduino-link.ico')
+            icon: path.join(__dirname, './icon/scratch-link.ico')
         }
         if (process.platform === 'darwin') {
-            dialogOptions.icon = path.join(__dirname, './icon/scratch-arduino-link.icns')
+            dialogOptions.icon = path.join(__dirname, './icon/scratch-link.icns')
         }
-        const tags = await remoteGitTags('https://github.com/OttawaSTEM/scratch-arduino-link')
+        const tags = await remoteGitTags('https://github.com/huintech/scratch-arduino-link')
         const latestVersion = Array.from(tags.keys()).pop().substring(1);
         if (latestVersion > app.getVersion()) {
-            dialogOptions.detail = 'Installed version: v' + app.getVersion() + '\n';  
-            dialogOptions.detail = dialogOptions.detail + 'Latest version: v' + latestVersion;  
+            dialogOptions.detail = 'Installed version: v' + app.getVersion() + '\n';
+            dialogOptions.detail = dialogOptions.detail + 'Latest version: v' + latestVersion;
             dialog.showMessageBox(null, dialogOptions).then((data) => {
                 if (data.response == 0) {
-                    shell.openExternal('https://github.com/OttawaSTEM/scratch-arduino-link/releases/latest');
+                    shell.openExternal('https://github.com/huintech/scratch-arduino-link/releases/latest');
                 }
             });
         }
