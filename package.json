@@ -1,6 +1,6 @@
 {
   "name": "scratch-arduino-link",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Provide local hardware function to scratch-arduino",
   "main": "src/main.js",
   "scripts": {
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ottawastem/scratch-arduino-link.git"
+    "url": "git+https://github.com/huintech/scratch-arduino-link.git"
   },
   "keywords": [
     "scratch",
@@ -26,12 +26,12 @@
     "scratch3.0",
     "serialport"
   ],
-  "author": "Ottawa STEM Club",
+  "author": "Coconut",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ottawastem/scratch-arduino-link/issues"
+    "url": "https://github.com/huintech/scratch-arduino-link/issues"
   },
-  "homepage": "https://github.com/ottawastem/scratch-arduino-link#readme",
+  "homepage": "https://github.com/huintech/scratch-arduino-link#readme",
   "dependencies": {
     "ansi-string": "^0.2.1",
     "compare-versions": "^3.6.0",

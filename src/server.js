@@ -84,7 +84,7 @@ class ScratchArduinoLink extends Emitter{
                 console.warn(info);
             });
     }
-    
+
     /**
      * Initial and Check tools, libraries and firmware update.
      */
@@ -134,8 +134,8 @@ class ScratchArduinoLink extends Emitter{
             for (const library of linkPackages['libraries']) {
                 libraryData[library['libraryName']] = library['version'];
             }
-            fs.writeFileSync(oldLibraryVersionPath, JSON.stringify(libraryData));   
-            
+            fs.writeFileSync(oldLibraryVersionPath, JSON.stringify(libraryData));
+
             // scratch-arduino-firmwares
             const firmwaresRepo = 'scratch-arduino-firmwares';
             const firmwarePath = path.join(path.resolve(this.toolsPath), '../firmwares');
@@ -171,10 +171,10 @@ class ScratchArduinoLink extends Emitter{
             for (const firmware of linkPackages['firmwares']) {
                 firmwareData[firmware['firmwareName']] = firmware['version'];
             }
-            fs.writeFileSync(oldFirmwareVersionPath, JSON.stringify(firmwareData));            
+            fs.writeFileSync(oldFirmwareVersionPath, JSON.stringify(firmwareData));
         } catch(err) {
             dialog.showMessageBox({
-                title: 'Scratch Arduino Link',
+                title: 'Scratch COCONUT Link',
                 type: 'error',
                 buttons: ['Close'],
                 message: 'Update error - ' + err.message

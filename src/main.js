@@ -70,14 +70,14 @@ function createWindow() {
         {
             label: 'Lanuch',
             click: function () {
-                shell.openExternal('https://scratch.ottawastem.com/')
+                shell.openExternal('http://coco-nut.kr/')
             }
         },
         {type: 'separator'},
         {
             label: 'Help',
             click: function () {
-                shell.openExternal('https://ottawastem.com/support/')
+                shell.openExternal('http://coco-nut.kr/support/')
             }
         },
         {
@@ -155,14 +155,14 @@ app.whenReady().then(() => {
         if (process.platform === 'darwin') {
             dialogOptions.icon = path.join(__dirname, './icon/scratch-link.icns')
         }
-        const tags = await remoteGitTags('https://github.com/OttawaSTEM/scratch-arduino-link')
+        const tags = await remoteGitTags('https://github.com/huintech/scratch-arduino-link')
         const latestVersion = Array.from(tags.keys()).pop().substring(1);
         if (latestVersion > app.getVersion()) {
             dialogOptions.detail = 'Installed version: v' + app.getVersion() + '\n';
             dialogOptions.detail = dialogOptions.detail + 'Latest version: v' + latestVersion;
             dialog.showMessageBox(null, dialogOptions).then((data) => {
                 if (data.response == 0) {
-                    shell.openExternal('https://github.com/OttawaSTEM/scratch-arduino-link/releases/latest');
+                    shell.openExternal('https://github.com/huintech/scratch-arduino-link/releases/latest');
                 }
             });
         }
