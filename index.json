@@ -20,50 +20,9 @@
             "version": "v2.5.8",
             "fileName": "ArduinoStandardFirmata-v2.5.8.zip",
             "folderName": "android"
-        },
-        {
-            "firmwareName": "ArduinoFastLEDFirmata",
-            "description": "Arduino FastLED Customized Firmata - v0.0.1",
-            "version": "v0.0.1",
-            "fileName": "ArduinoFastLEDFirmata-v0.0.1.zip",
-            "folderName": "android"
         }
     ],
     "libraries": [
-        {
-            "libraryName": "DHTStable Sensor",
-            "description": "DTH11 Humidity and Temperature Sensor Library - v1.0.1",
-            "version": "v1.0.1",
-            "fileName": "DHTStable-v1.0.1.zip",
-            "folderName": "DHTStable"
-        },
-        {
-            "libraryName": "FastLED",
-            "description": "FastLED Library - v3.4.0",
-            "version": "v3.4.0",
-            "fileName": "FastLED-v3.4.0.zip",
-            "folderName": "FastLED"
-        },
-        {
-            "libraryName": "OttoDIYLib",
-            "description": "Otto Robotic Arduino Library - v9.3.0",
-            "version": "v9.3.0",
-            "fileName": "OttoDIYlib-v9.3.0.zip",
-            "folderName": "OttoDIYLib"
-        },
-        {
-            "libraryName": "ServoESP32",
-            "description": "ESP32 Servo - v1.0.3",
-            "version": "v1.0.3",
-            "fileName": "ServoESP32-v1.0.3.zip",
-            "folderName": "ServoESP32"
-        },
-        {
-            "libraryName": "Ultrasonic Sensor",
-            "description": "Ultrasonic Sensor Library - v3.0.0",
-            "version": "v3.0.0",
-            "fileName": "Ultrasonic-v3.0.0.zip",
-            "folderName": "Ultrasonic"
-        }
+
     ]
 }
