@@ -1,7 +1,7 @@
 {
   "name": "scratch-arduino-link",
   "version": "1.0.0",
-  "description": "Porvide local hardware function to scratch-arduino",
+  "description": "Provide local hardware function to scratch-arduino",
   "main": "src/main.js",
   "scripts": {
     "clean": "rimraf dist tools libraries firmwares",
@@ -9,6 +9,7 @@
     "build-win": "npm run fetch && electron-builder --config electron-builder-win.yml",
     "build-mac": "npm run fetch && electron-builder --config electron-builder-mac.yml",
     "start": "electron .",
+    "install": "electron-rebuild",
     "docs": "jsdoc -c .jsdoc.json",
     "test": "node script/test.js",
     "lint": "eslint ./src"
@@ -49,6 +50,7 @@
     "cpy-cli": "^3.1.1",
     "electron": "^13.1.7",
     "electron-builder": "^22.11.7",
+    "electron-rebuild": "^3.2.9",
     "eslint": "^5.3.0",
     "jsdoc": "^3.6.6",
     "rimraf": "^3.0.2"
