@@ -1,14 +1,14 @@
 directories:
   buildResources: buildResources
   output: dist
-extraResources: ["tools", "firmwares", "libraryes"]
+extraResources: ["tools", "firmwares"]
 
-appId: "net.huintech.scratch-coconut-link"
-productName: "Scratch COCONUT Link"
+appId: "net.huintech.scratch-arduino-link"
+productName: "ScratchCoconutLink"
 publish: # empty provider list = don't publish
 
 fileAssociations:
-  ext: sba
+  ext: sb3
   name: Scratch Coconut Project File
   role: Editor
   icon: buildResources/scratch-arduino-file.ico
