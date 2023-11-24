@@ -1,0 +1,45 @@
+directories:
+  buildResources: buildResources
+  output: dist
+extraResources: ["tools", 'firmwares', 'libraryes']
+
+appId: 'net.huintech.scratch-arduino-link'
+productName: "ScratchCoconutLink"
+publish: # empty provider list = don't publish
+
+mac:
+  category: public.app-category.education
+  entitlements: buildResources/entitlements.mac.plist
+  gatekeeperAssess: true
+  hardenedRuntime: true
+  icon: buildResources/scratch-arduino-link.icns
+  provisioningProfile: embedded.provisionprofile
+  artifactName: "Scratch Link ${version}.${ext}"
+  target:
+    - dmg
+    # - mas
+dmg:
+  title: "Scratch Link ${version}"
+# mas:
+#   category: public.app-category.education
+#   entitlements: buildResources/entitlements.mas.plist
+#   entitlementsInherit: buildResources/entitlements.mas.inherit.plist
+#   hardenedRuntime: false
+#   icon: buildResources/OpenBlock-Link.icns
+
+win:
+  icon: buildResources/scratch-arduino-link.ico
+  target:
+    # - appx
+    - nsis
+# appx:
+#   identityName: OpenBlock.OpenBlockLinkDesktop
+#   publisherDisplayName: "OpenBlock"
+#   publisher: "CN=2EC43DF1-469A-4119-9AB9-568A0A1FF65F"
+#   artifactName: "OpenBlock Link Desktop ${version}.${ext}"
+nsis:
+  oneClick: false # allow user to choose per-user or per-machine
+  allowToChangeInstallationDirectory: true
+  include: buildResources/installer.nsh
+#   license: LICENSE
+  artifactName: "ScratchCoconutLink-${version}-Setup.${ext}"

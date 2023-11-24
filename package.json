@@ -1,7 +1,7 @@
 {
   "name": "scratch-arduino-link",
   "version": "0.1.0",
-  "description": "Provide local hardware function to scratch-arduino",
+  "description": "Provide local hardware function to scratch-coconut",
   "main": "src/main.js",
   "scripts": {
     "clean": "rimraf dist tools libraries firmwares",
@@ -9,6 +9,10 @@
     "build-win": "npm run fetch && electron-builder --config electron-builder-win.yml",
     "build-mac": "npm run fetch && electron-builder --config electron-builder-mac.yml",
     "start": "electron .",
+    "build": "electron-builder",
+    "build:pack": "electron-builder --dir",
+    "dist": "npm run clean && npm run fetch && electron-builder",
+    "dist32": "npm run clean && npm run fetch:all32 && electron-builder --ia32",
     "install": "electron-rebuild",
     "docs": "jsdoc -c .jsdoc.json",
     "test": "node script/test.js",
@@ -21,7 +25,7 @@
   "keywords": [
     "scratch",
     "link",
-    "arduino",
+    "coconut",
     "nodejs",
     "scratch3.0",
     "serialport"
@@ -33,9 +37,12 @@
   },
   "homepage": "https://github.com/huintech/scratch-arduino-link#readme",
   "dependencies": {
+    "electron-progressbar": "^2.0.1",
+    "os-locale": "^5.0.0",
+    "node-localstorage": "^2.2.1",
     "ansi-string": "^0.2.1",
-    "compare-versions": "^3.6.0",
     "del": "^6.0.0",
+    "compare-versions": "^3.6.0",
     "download-github-release": "^0.3.2",
     "electron-update-notifier": "^1.3.1",
     "install": "^0.13.0",
@@ -49,9 +56,12 @@
     "babel-eslint": "^10.0.1",
     "cpy-cli": "^3.1.1",
     "electron": "^13.1.7",
-    "electron-builder": "^22.11.7",
+    "electron-builder": "^22.9.1",
     "electron-rebuild": "^3.2.9",
-    "eslint": "^5.3.0",
+    "format-message": "^6.2.3",
+    "format-message-cli": "^6.2.3",
+    "eslint": "^5.16.0",
+    "eslint-config-scratch": "^5.0.0",
     "jsdoc": "^3.6.6",
     "rimraf": "^3.0.2"
   }

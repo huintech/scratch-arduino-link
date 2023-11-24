@@ -19,10 +19,10 @@ win:
     - nsis
 
 nsis:
-  perMachine: false
+#  perMachine: false
   oneClick: false
   allowToChangeInstallationDirectory: true
-  artifactName: "Scratch-COCONUT-Link-Win-v${version}.${ext}"
-  deleteAppDataOnUninstall: true
-  createDesktopShortcut: true
+  artifactName: "Scratch-COCONUT-Link-Setup-v${version}.${ext}"
+#  deleteAppDataOnUninstall: true
+#  createDesktopShortcut: true
   include: buildResources/installer.nsh

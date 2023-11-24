@@ -11,9 +11,33 @@ const del = require('del');
 
 const Menu = electron.Menu;
 const Tray = electron.Tray;
-var appTray = null;
+
+let appTray = null;
 
 let mainWindow;
+
+// const showOperationFailedMessageBox = err => {
+//     dialog.showMessageBox({
+//         type: 'error',
+//         buttons: ['Ok'],
+//         message: formatMessage({
+//             id: 'index.messageBox.operationFailed',
+//             default: 'Operation failed',
+//             description: 'Prompt for operation failed'
+//         }),
+//         detail: err
+//     });
+// };
+
+// const handleClickLanguage = l => {
+//     locale = l;
+//     formatMessage.setup({
+//         locale: locale,
+//         translations: locales
+//     });
+//
+//     appTray.setContextMenu(Menu.buildFromTemplate(makeTrayMenu(locale)));
+// };
 
 function createWindow() {
     mainWindow = new BrowserWindow({
@@ -24,12 +48,22 @@ function createWindow() {
         resizable: false,
         fullscreenable: false,
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
+            enableRemoteModule: true
         }
     })
 
     mainWindow.loadFile('./src/index.html');
     mainWindow.setMenu(null)
+
+    // if (locale === undefined) {
+    //     locale = 'ko';
+    // }
+    //
+    // formatMessage.setup({
+    //     locale: locale,
+    //     translations: locales
+    // });
 
     const userDataPath = electron.app.getPath('userData');
     const dataPath = path.join(userDataPath, 'Data');
@@ -96,7 +130,7 @@ function createWindow() {
         appTray = new Tray(nativeImage.createFromPath(path.join(__dirname, './icon/scratch-link-menubar.png')));
     }
     const contextMenu = Menu.buildFromTemplate(trayMenuTemplate);
-    appTray.setToolTip('Scratch Arudino Link');
+    appTray.setToolTip('Scratch COCONUT Link');
     appTray.setContextMenu(contextMenu);
 
     appTray.on('click',function(){
@@ -143,7 +177,7 @@ app.on('activate', function () {
 app.whenReady().then(() => {
     (async () => {
         let dialogOptions = {
-            title: 'Scratch Arduino Link',
+            title: 'Scratch COCONUT Link',
             type: 'info',
             buttons: ['Download', 'Later'],
             defaultId: 0,
@@ -156,15 +190,15 @@ app.whenReady().then(() => {
             dialogOptions.icon = path.join(__dirname, './icon/scratch-link.icns')
         }
         const tags = await remoteGitTags('https://github.com/huintech/scratch-arduino-link')
-        const latestVersion = Array.from(tags.keys()).pop().substring(1);
-        if (latestVersion > app.getVersion()) {
-            dialogOptions.detail = 'Installed version: v' + app.getVersion() + '\n';
-            dialogOptions.detail = dialogOptions.detail + 'Latest version: v' + latestVersion;
-            dialog.showMessageBox(null, dialogOptions).then((data) => {
-                if (data.response == 0) {
-                    shell.openExternal('https://github.com/huintech/scratch-arduino-link/releases/latest');
-                }
-            });
-        }
+        // const latestVersion = Array.from(tags.keys()).pop().substring(1);
+        // if (latestVersion > app.getVersion()) {
+        //     dialogOptions.detail = 'Installed version: v' + app.getVersion() + '\n';
+        //     dialogOptions.detail = dialogOptions.detail + 'Latest version: v' + latestVersion;
+        //     dialog.showMessageBox(null, dialogOptions).then((data) => {
+        //         if (data.response == 0) {
+        //             shell.openExternal('https://github.com/huintech/scratch-arduino-link/releases/latest');
+        //         }
+        //     });
+        // }
     })();
 })
